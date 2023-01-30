@@ -99,6 +99,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(userDatabase: UserDatabase): RoomRepository = RoomRepositoryImpl(userDatabase.userDao())
+    fun provideDao(userDatabase: UserDatabase): UserDao = userDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(userDao: UserDao): RoomRepository = RoomRepositoryImpl(userDao)
 
 }

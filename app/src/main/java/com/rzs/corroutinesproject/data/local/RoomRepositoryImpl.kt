@@ -1,8 +1,9 @@
 package com.rzs.corroutinesproject.data.local
 
 import com.rzs.corroutinesproject.domain.RoomRepository
+import javax.inject.Inject
 
-class RoomRepositoryImpl(
+class RoomRepositoryImpl @Inject constructor(
     private val userDao: UserDao
 ) : RoomRepository {
     override suspend fun addUser() {
