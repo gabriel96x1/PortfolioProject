@@ -46,17 +46,17 @@ Sample app this is intended to become into a big portfolio to show my skills!!
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
     
 ## Observer4LiveData + ViewmodelProvided to Fragment + instance of RecyclerView Adapter on:
-### [RetrofitFragment.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/RetrofitFragment.kt)
+### [RetrofitFragment.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/RetrofitFragment.kt)
 
 ## Singleton + DI + Retrofit + cache + room instantiation
-### [AppModule.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/di/AppModule.kt)
+### [AppModule.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/di/AppModule.kt)
 
 ## Repository injection + viewModel implementation
-### [RetrofitFragmentViewModel.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/viewmodel/RetrofitFragmentViewModel.kt)
+### [RetrofitFragmentViewModel.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/viewmodel/RetrofitFragmentViewModel.kt)
 
 ## Foreground Service Implementation
-### [ForegroundService.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/services/ForegroundService.kt)
-### LaunchingForeground Service: [AndroidServicesFragment.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/AndroidServicesFragment.kt)
+### [ForegroundService.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/services/ForegroundService.kt)
+### LaunchingForeground Service: [AndroidServicesFragment.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/AndroidServicesFragment.kt)
 
-## BroadcastReceiver Implementation (Stop Forefround Service)
-### [StopForegroundServiceReceiver.kt](https://github.com/gabriel96x1/SuperPortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/receivers/StopForegroundServiceReceiver.kt)
+## BroadcastReceiver Implementation (Stop Foreground Service)
+### [StopForegroundServiceReceiver.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/receivers/StopForegroundServiceReceiver.kt)
