@@ -8,12 +8,20 @@ Sample app this is intended to become into a big portfolio to show my skills!!
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    //Lifecycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    
+    //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    
+    //For Recyclerview
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.cardview:cardview:1.0.0"
+    
+     //Testing
     implementation 'androidx.test.ext:junit-ktx:1.1.4'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.4'
@@ -60,3 +68,26 @@ Sample app this is intended to become into a big portfolio to show my skills!!
 
 ## BroadcastReceiver Implementation (Stop Foreground Service)
 ### [StopForegroundServiceReceiver.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/receivers/StopForegroundServiceReceiver.kt)
+
+## InfiniteList RecyclerView
+### [Fragment](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/RecyclerViewPaginationFragment.kt)
+### [ViewModel](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/viewmodel/RecyclerViewPaginationFragmentViewModel.kt)
+### [Adapter](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/recyclerview/paginationrecyclerview/PaginationViewAdapter.kt)
+
+# Code Snippets
+SharedPreferences usage:
+
+            val sharedPref = getSharedPreferences("myPref", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            
+            val userName = edtUsername.text.toString()
+            val email = edtEmail.text.toString()
+
+                editor.apply {
+                    putString("user_name",userName)
+                    putString("email",email)
+                    apply()
+                }
+                
+                val userName = sharedPref.getString("user_name",null)
+                val email = sharedPref.getString("email",null)
