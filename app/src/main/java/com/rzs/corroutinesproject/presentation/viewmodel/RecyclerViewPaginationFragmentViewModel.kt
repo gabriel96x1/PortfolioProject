@@ -13,10 +13,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
-
-const val PREFIX_GAMES_BODY_REQUEST = "fields name,summary,url; limit 10; offset "
-const val PREFIX_AUTH_TOKEN = "Bearer "
-
 @HiltViewModel
 class RecyclerViewPaginationFragmentViewModel @Inject constructor(
     private val repository: NetworkRepository
@@ -75,6 +71,10 @@ class RecyclerViewPaginationFragmentViewModel @Inject constructor(
             val current = gamesList.value
             gamesList.value = current.orEmpty().toMutableList()
         }
+    }
 
+    companion object {
+        const val PREFIX_GAMES_BODY_REQUEST = "fields name,summary,url; limit 10; offset "
+        const val PREFIX_AUTH_TOKEN = "Bearer "
     }
 }

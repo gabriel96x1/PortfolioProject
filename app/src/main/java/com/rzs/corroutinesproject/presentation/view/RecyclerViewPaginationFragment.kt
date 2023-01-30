@@ -10,16 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rzs.corroutinesproject.R
-import com.rzs.corroutinesproject.databinding.FragmentMainScreenBinding
 import com.rzs.corroutinesproject.databinding.FragmentRecyclerViewPaginationBinding
-import com.rzs.corroutinesproject.domain.model.Country
 import com.rzs.corroutinesproject.domain.model.Game
 import com.rzs.corroutinesproject.presentation.recyclerview.paginationrecyclerview.PaginationViewAdapter
-import com.rzs.corroutinesproject.presentation.recyclerview.retrofitrecyclerview.RetrofitViewAdapter
-import com.rzs.corroutinesproject.presentation.viewmodel.PREFIX_AUTH_TOKEN
 import com.rzs.corroutinesproject.presentation.viewmodel.RecyclerViewPaginationFragmentViewModel
-import com.rzs.corroutinesproject.presentation.viewmodel.RetrofitFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,7 +57,7 @@ class RecyclerViewPaginationFragment : Fragment() {
         val adapter = PaginationViewAdapter(games)
 
         //Log.d("gamelist", viewModel.gamesList.value.toString())
-        viewModel.gamesList.observeForever {
+        viewModel.gamesList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             Log.d("dataChanged", it.toString())
         }

@@ -69,7 +69,7 @@ object AppModule {
             .addInterceptor { chain ->
                 var request = chain.request()
                 request = if (!isOffline)
-                    request.newBuilder().header("Cache-Control", "public, max-age=" + 1).build()
+                    request.newBuilder().header("Cache-Control", "public, max-age=" + 50).build()
                 else
                     request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
                 chain.proceed(request)
@@ -88,7 +88,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): NetworkService = retrofit.create(NetworkService::class.java)
-
 
     @Provides
     @Singleton
