@@ -60,3 +60,26 @@ Sample app this is intended to become into a big portfolio to show my skills!!
 
 ## BroadcastReceiver Implementation (Stop Foreground Service)
 ### [StopForegroundServiceReceiver.kt](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/domain/receivers/StopForegroundServiceReceiver.kt)
+
+## InfiniteList RecyclerView
+### [Fragment](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/view/RecyclerViewPaginationFragment.kt)
+### [ViewModel](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/viewmodel/RecyclerViewPaginationFragmentViewModel.kt)
+### [Adapter](https://github.com/gabriel96x1/PortfolioProject/blob/master/app/src/main/java/com/rzs/corroutinesproject/presentation/recyclerview/paginationrecyclerview/PaginationViewAdapter.kt)
+
+# Code Snippets
+SharedPreferences usage:
+
+            val sharedPref = getSharedPreferences("myPref", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            
+            val userName = edtUsername.text.toString()
+            val email = edtEmail.text.toString()
+
+                editor.apply {
+                    putString("user_name",userName)
+                    putString("email",email)
+                    apply()
+                }
+                
+                val userName = sharedPref.getString("user_name",null)
+                val email = sharedPref.getString("email",null)
