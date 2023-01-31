@@ -56,26 +56,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(myCache: Cache, isOffline: Boolean) = if (BuildConfig.DEBUG) {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    } else {
+    fun provideOkHttpClient(myCache: Cache, isOffline: Boolean) =
         OkHttpClient
-            .Builder()
-            .cache(myCache)
-            .addInterceptor { chain ->
-                var request = chain.request()
-                request = if (!isOffline)
-                    request.newBuilder().header("Cache-Control", "public, max-age=" + 50).build()
-                else
-                    request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
-                chain.proceed(request)
-            }
-            .build()
-    }
+        .Builder()
+        .cache(myCache)
+        .addInterceptor { chain ->
+            var request = chain.request()
+            request = if (!isOffline)
+                request.newBuilder().header("Cache-Control", "public, max-age=" + 50).build()
+            else
+                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+            chain.proceed(request)
+        }
+        .build()
 
     @Singleton
     @Provides
