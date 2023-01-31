@@ -1,10 +1,12 @@
 package com.rzs.corroutinesproject.presentation.view
 
+import android.app.ProgressDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +17,13 @@ import com.rzs.corroutinesproject.presentation.recyclerview.retrofitrecyclerview
 import com.rzs.corroutinesproject.presentation.viewmodel.RetrofitFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class RetrofitFragment : Fragment() {
     private lateinit var viewModel: RetrofitFragmentViewModel
     private var countries : MutableList<Country> = ArrayList()
     private lateinit var recyclerview : RecyclerView
+    private lateinit var progressBar : ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +33,25 @@ class RetrofitFragment : Fragment() {
 
         // getting the recyclerview by its id
         recyclerview = view.findViewById(R.id.rvr)
+        progressBar = view.findViewById(R.id.indeterminateBar)
 
+        setupProgressBar()
+        setupRecyclerView()
+
+        return view
+    }
+
+    private fun setupProgressBar() {
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it)
+                progressBar.visibility = View.VISIBLE
+            else
+                progressBar.visibility = View.GONE
+        })
+
+    }
+
+    private fun setupRecyclerView() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this.context)
 
@@ -39,14 +61,10 @@ class RetrofitFragment : Fragment() {
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
 
+
         viewModel.refresh()
         viewModel.countries.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-
-        // Inflate the layout for this fragment
-        return view
     }
-
-
 }
