@@ -3,6 +3,7 @@ package com.rzs.corroutinesproject.domain.services
 import android.app.*
 import android.content.Intent
 import android.os.Build
+import android.os.CountDownTimer
 import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -10,12 +11,15 @@ import androidx.core.graphics.drawable.IconCompat
 import com.rzs.corroutinesproject.R
 import com.rzs.corroutinesproject.domain.receivers.ACTION_CANCEL
 import com.rzs.corroutinesproject.domain.receivers.StopForegroundServiceReceiver
+import com.rzs.corroutinesproject.presentation.MainActivity
 
 
 private const val CHANNEL_ID = "CHANNEL_FOREGROUND"
 private const val CHANNEL_NAME = "FOREGROUND"
 
 class ForegroundService : Service() {
+
+    lateinit var notification: Notification
 
     override fun onBind(intent: Intent): IBinder? = null
 
@@ -27,13 +31,19 @@ class ForegroundService : Service() {
         stopServiceIntent.action = ACTION_CANCEL
         val pendingIntent =
             PendingIntent.getBroadcast(this, 0, stopServiceIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+
+        val notifyIntent = Intent(this, MainActivity::class.java)
+        notifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingIntentActivity =
+            PendingIntent.getActivity(this, 0, notifyIntent ,PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
         val notificationManager = getSystemService(NotificationManager::class.java)
         val channel = createChannel()
         notificationManager.createNotificationChannel(channel)
 
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Notification foreground")
-            .setContentText(getString(R.string.foregroud_service_message))
+        notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(getString(R.string.foreground_service_title))
+            .setContentText("some notification")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .addAction(
                 NotificationCompat.Action(
@@ -42,8 +52,8 @@ class ForegroundService : Service() {
                     pendingIntent
                 )
             )
+            .setContentIntent(pendingIntentActivity)
             .build()
-
         startForeground(1, notification)
 
         return START_NOT_STICKY
@@ -62,5 +72,4 @@ class ForegroundService : Service() {
             description = "CHANNEL_DESCRIPTION"
             setSound(null, null)
         }
-
 }
